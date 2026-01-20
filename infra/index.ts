@@ -1,14 +1,27 @@
 import * as k8s from "@pulumi/kubernetes";
 
-const appLabels = { app: "nginx" };
-const deployment = new k8s.apps.v1.Deployment("nginx", {
-    spec: {
-        selector: { matchLabels: appLabels },
-        replicas: 1,
-        template: {
-            metadata: { labels: appLabels },
-            spec: { containers: [{ name: "nginx", image: "nginx" }] }
+// Install the Prometheus-Community Helm Chart
+const prometheusStack = new k8s.helm.v3.Chart("prometheus-stack", {
+    repo: "prometheus-community",
+    chart: "kube-prometheus-stack",
+    namespace: "monitoring",
+    values: {
+        grafana: { enabled: false },
+        alertmanager: { enabled: false },
+        prometheus: {
+            service: {
+                type: "LoadBalancer",
+                // This 'nodePort' combined with the k3d port mapping ensures
+                // we can reach it at localhost:9090
+                nodePort: 30090
+            }
         }
-    }
+    },
+    fetchOpts: {
+        repo: "https://prometheus-community.github.io/helm-charts",
+    },
 });
-export const name = deployment.metadata.name;
+
+export const namespaceName = "monitoring";
+
+export const prometheusUrl = "http://localhost:9090";
