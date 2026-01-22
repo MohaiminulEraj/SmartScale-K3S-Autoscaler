@@ -1,0 +1,15 @@
+# k3d-config.yaml
+apiVersion: k3d.io/v1alpha5
+kind: Simple
+metadata:
+  name: smartscale
+servers: 1
+agents: 2
+ports:
+  # Map Host Port 9090 -> Container LoadBalancer Port 9090
+  - port: 9090:9090
+    nodeFilters:
+      - loadbalancer
+options:
+  k3d:
+    wait: true
