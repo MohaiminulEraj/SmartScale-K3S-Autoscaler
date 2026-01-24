@@ -1,4 +1,4 @@
-# 🚀 SmartScale K3s Autoscaler (Simplified & Cloud-Adapted)
+# 🚀 SmartScale K3s Autoscaler
 
 Automated scaling for K3s clusters on AWS using Pulumi and AWS Lambda. This project provisions a K3s cluster and deploys a serverless autoscaler that manages worker nodes based on CPU load.
 
@@ -86,7 +86,7 @@ Due to lab restrictions preventing automatic IAM Role attachment, you must manua
     # Ensure service account exists (ignore if already exists)
     sudo /usr/local/bin/k3s kubectl create serviceaccount autoscaler -n kube-system
     sudo /usr/local/bin/k3s kubectl create clusterrolebinding autoscaler-admin --clusterrole=cluster-admin --serviceaccount=kube-system:autoscaler
-    
+
     # Generate token
     TOKEN=$(sudo /usr/local/bin/k3s kubectl create token autoscaler -n kube-system --duration=8760h)
     echo "$TOKEN" > api-token
