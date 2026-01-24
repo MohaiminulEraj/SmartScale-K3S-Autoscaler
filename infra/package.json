@@ -7,8 +7,10 @@
     },
     "dependencies": {
         "@pulumi/aws": "^7.16.0",
+        "@pulumi/command": "^1.1.3",
         "@pulumi/kubernetes": "^4.0.0",
         "@pulumi/pulumi": "^3.113.0",
+        "@pulumi/tls": "^5.2.3",
         "dotenv": "^17.2.3"
     }
 }
