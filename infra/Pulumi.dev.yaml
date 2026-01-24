@@ -1,2 +1,3 @@
 config:
   aws:region: ap-southeast-1
+encryptionsalt: v1:5ZaN7AuGSgI=:v1:eN+xu44Un0ZM7seq:WmB2eWd7D+rtbzhR3D15tty1ja60JA==
